@@ -37,7 +37,14 @@ public class StudyClass{
             }
             FileWriter fileWriter = new FileWriter(file);
             fileWriter.write("Superclass:\n\n");
-            fileWriter.write(mClass.getGenericSuperclass().toString());
+            if(mClass.isInterface()){
+                Class[] interfaces = mClass.getInterfaces();
+                for(Class cInterface : interfaces){
+                    fileWriter.write("\n"+cInterface);
+                }
+            }else{
+                fileWriter.write(mClass.getSuperclass().toGenericString());
+            }
             fileWriter.write("\n\n\nMethods:\n\n\n");
             for(Method method : methods){
                 fileWriter.write(method.toString()+"\n\n");
