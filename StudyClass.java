@@ -29,6 +29,7 @@ public class StudyClass{
         }
         Method[] methods = mClass.getDeclaredMethods();
         Field[] fields = mClass.getDeclaredFields();
+        String cls = mClass.toGenericString();
         File file = new File("StudyClass"+File.separator+fClass[fClass.length-1]+".txt");
         try{
             if(!file.getParentFile().exists()){
@@ -38,7 +39,8 @@ public class StudyClass{
                 file.createNewFile();
             }
             FileWriter fileWriter = new FileWriter(file);
-            fileWriter.write("Superclass:\n\n");
+            fileWriter.write("Class:\n\n"+cls+"\n\n");
+            fileWriter.write("\n\nSuperclass:\n\n");
             if(mClass.isInterface()){
                 Class[] interfaces = mClass.getInterfaces();
                 for(Class cInterface : interfaces){
