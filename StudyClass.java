@@ -3,6 +3,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.*;
 import java.io.File;
+import java.io.FileOutputStream;
 
 public class StudyClass{
     public static void main(String[] args){
@@ -18,10 +19,11 @@ public class StudyClass{
                 if(fClass.length==1){
                     mClass = findClass(className);
                 }else{
-                    handleNoClass();
+                    assert false; //throw assertion error
                 }
-            }catch(ClassNotFoundException cnfe){
-                handleNoClass();
+            }catch(ClassNotFoundException | AssertionError cnfe){
+                JOptionPane.showMessageDialog(null, "No such class found.\nPlease make sure you have entered the name correctly and it exists");
+                reRun();
             }
         }
         if(mClass==null){
@@ -89,10 +91,5 @@ public class StudyClass{
     private static void reRun(){
         int again = JOptionPane.showConfirmDialog(null,"Inspect another class?");
         if(again==0) main(null);
-    }
-
-    private static void handleNoClass(){
-        JOptionPane.showMessageDialog(null, "No such class found.\nPlease make sure you have entered the name correctly and it exists");
-        reRun();
     }
 }
